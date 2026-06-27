@@ -1,0 +1,73 @@
+// CREATE TABLE
+CREATE TABLE users(
+    user_id INTEGER,
+    user_name VARCHAR(225),
+    user_age INTEGER
+)
+
+//   CONSTRAINTS  
+// 1) NOT NULL
+CREATE TABLE users(
+    user_id INTEGER NOT NULL,
+    user_name VARCHAR(225) NOT NULL,
+    user_age INTEGER NOT NULL
+)
+
+// 2) UNIQUE
+CREATE TABLE users(
+    user_id INTEGER NOT NULL,
+    user_name VARCHAR(225) NOT NULL,
+    user_email VARCHAR(225) NOT NULL UNIQUE,
+    user_pass VARCHAR(225) NOT NULL
+// CONSTRAINT user_email_unique UNIQUE (email)
+)
+
+// 3) PRIMARY KEY
+CREATE TABLE users(
+    user_id INTEGER NOT NULL,
+    user_name VARCHAR(225) NOT NULL PRIMARY KEY,
+    user_email VARCHAR(225) NOT NULL UNIQUE,
+    user_pass VARCHAR(225) NOT NULL
+//CONSTRAINT user_id PRIMARY KEY (user_id)
+)
+
+// 4) AUTO INCREMENT
+CREATE TABLE users(
+    user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(225) NOT NULL,
+    user_email VARCHAR(225) NOT NULL UNIQUE,
+    user_pass VARCHAR(225) NOT NULL
+)
+// 5) CHECK
+CREATE TABLE student(
+    stud_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    stud_name VARCHAR(225) NOT NULL,
+    stud_email VARCHAR(225) NOT NULL UNIQUE,
+    stud_pass VARCHAR(225) NOT NULL,
+    stud_age INTEGER CHECK (age > 6 AND age < 25)
+//CONSTRAINT stud_age CHECK (age > 6 AND age < 25)
+)
+
+// 6) DEFAULT
+CREATE TABLE ticket(
+    tkt_id INTEGER PRIMARY KEY,
+    tkt_name VARCHAR(225) NOT NULL,
+    travel_time TIMEDATE DEFAULT TIME_STAMP 
+)
+
+// 7) FOREIGN KEY
+CREATE TABLE orders(
+    order_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    stu_id INTEGER NOT NULL,
+    order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    CONSTRAINT order_fk FOREIGN KEY (stu_id) REFERENCES student(stu_id)
+)
+
+//  ALTER TABLE
+
+ALTER TABLE student ADD COLUMN password VARCHAR(225) NOT NULL
+
+//MODIFICATION IN COLUMN OF TABLE
+ALTER TABLE student MODIFY COLUMN surname INTEGER AUTO_INCREMENT
+  
