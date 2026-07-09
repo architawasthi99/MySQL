@@ -1,0 +1,104 @@
+# SORTING
+ 1) FIND TOP 5 SAMSUNG PHONES WITH BIGGEST SCREEN SIZE
+     SELECT brand_name, model, screen_size FROM employee.smartphones
+     WHERE brand_name='samsung'
+     ORDER BY screen_size DESC LIMIT 5;
+
+ 2) SORT ALL THE PHONES WITH DESCENDING ORDER OF NUMBER OF CAMERAS
+     SELECT brand_name,model,num_front_cameras+num_rear_cameras AS 'total_camera' 
+     FROM employee.smartphones
+     ORDER BY total_camera DESC;
+
+3) SORT DATA ON THE BASIS OF PPI IN DESCREASING ORDER
+   SELECT brand_name,model,SQRT(resolution_height * resolution_height + resolution_width * resolution_width)/screen_size AS 'ppi'
+   FROM employee.smartphones
+   ORDER BY ppi DESC;
+
+4) FIND THE PHONE WITH 2ND LARGEST BATTERY 
+  SELECT battery_capacity
+  FROM employee.smartphones
+  ORDER BY battery_capacity DESC LIMIT 1,1;
+
+5) FIND THE NAME AND RATING OF WORST RATED APPLE PHONE
+  SELECT brand_name,rating FROM employee.smartphones
+  WHERE brand_name = 'apple'
+  ORDER BY rating ASC;
+
+6) SORT PHONES ALPHABETICALLY AND THEN ON THE BASIS OF RATING IN DESC ORDER
+  SELECT brand_name,rating 
+  FROM employee.smartphones
+  ORDER BY brand_name,rating DESC;
+
+7) SORT PHONES ALPHABETICALLY AND THEN ON THE BASIS OF PRICE IN ASC ORDER
+  SELECT brand_name,model,price
+  FROM employee.smartphones
+  ORDER BY brand_name,price ASC;
+
+# GROUPING DATA
+1) Group smartphones by brand and get the count, average price, max rating, avg screen size and avg battery capacity
+  SELECT brand_name, COUNT(*) AS 'total_phones', 
+  ROUND(AVG(price)) AS 'average_price',
+  MAX(rating) AS 'max_rating',
+  AVG(screen_size) AS 'avg_screen',
+  AVG(battery_capacity) AS 'battery'
+  FROM employee.smartphones
+  GROUP BY brand_name
+  ORDER BY total_phones DESC;
+
+2) Group smartphones by whether they have an NFC and get the average price and rating
+SELECT has_nfc,
+AVG(price) AS 'AVERAGE PRICE',
+AVG(rating) AS 'AVERAGE RTING'
+FROM employee.smartphones
+GROUP BY has_nfc;
+
+3) Group smartphones by the extended memory available and get the average price
+SELECT extended_memory_available,
+ROUND(AVG(price)) AS 'AVERAGE PRICE'
+FROM employee.smartphones
+GROUP BY extended_memory_available;
+
+4) Group smartphones by the brand and processor brand and get the count of models and the average primary camera resolution (rear)
+SELECT brand_name , processor_brand,
+COUNT(model),
+ROUND(AVG(primary_camera_rear))
+FROM employee.smartphones
+GROUP BY brand_name, processor_brand;
+
+5)Find top 5 most costly phone brands
+SELECT brand_name ,
+ROUND(AVG(price)) AS 'average_price'
+FROM employee.smartphones
+GROUP BY brand_name
+ORDER BY average_price DESC LIMIT 5;
+
+6) Which brand makes the smallest screen smartphones
+SELECT  brand_name,
+AVG(screen_size) AS 'min_screen_size'
+FROM employee.smartphones
+GROUP BY brand_name
+ORDER BY min_screen_size ASC LIMIT 1;
+
+7) Avg price of 5G phones vs avg price of non-5G phones
+SELECT  has_5g,
+ROUND(AVG(price)) AS 'avg_price'
+FROM employee.smartphones
+GROUP BY has_5g;
+
+8) Group smartphones by the brand, and find the brand with the highest number of models that have both NFC and an IR blaster
+SELECT  brand_name, COUNT(*) AS 'count'
+FROM employee.smartphones
+WHERE has_5g = 'True' AND has_ir_blaster = 'True'
+GROUP BY brand_name;
+
+9) Find all Samsung 5G enabled smartphones and find out the avg price for NFC and Non-NFC phones
+SELECT  brand_name , has_nfc,
+ROUND(AVG(price)) AS 'AVG_PRICE'
+FROM employee.smartphones
+WHERE brand_name='samsung'
+GROUP BY has_nfc;
+
+10)Find the phone name, price of the costliest phone 
+SELECT  brand_name, model, price
+FROM employee.smartphones
+ORDER BY price DESC LIMIT 1;
