@@ -1,0 +1,23 @@
+1) Find the top 5 batsman in IPL
+SELECT batter,
+SUM(batsman_run) AS 'total_runs'
+FROM employee.ipl_ball_by_ball_2008_2022
+GROUP BY batter
+ORDER BY total_runs DESC LIMIT 5;
+
+2) Find the 2nd highest 6 hitter in IPL
+SELECT batter,
+COUNT(*) AS 'num_sixes'
+FROM employee.ipl_ball_by_ball_2008_2022
+WHERE batsman_run = 6
+GROUP BY batter
+ORDER BY num_sixes DESC LIMIT 1,1;
+
+3) Find top 10 batsman with centuries in IPL
+
+SELECT batter,ID,
+SUM(batsman_run) AS 'score'
+FROM employee.ipl_ball_by_ball_2008_2022
+GROUP BY batter,ID
+HAVING score>=100
+ORDER BY batter DESC;
