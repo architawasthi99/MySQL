@@ -1,0 +1,15 @@
+1) TOP 5 MOST SOLD PRODUCTS
+SELECT Name, SUM(Quantity) AS 'TOTAL'FROM sales.sales1 t1
+JOIN sales.products t2
+ON t1.ProductID = t2.ProductID
+GROUP BY Name
+ORDER BY TOTAL DESC LIMIT 5
+
+2)FIND THE SALES MAN WHO SOLD MOST NUMBER OF PRODUCTS
+SELECT t1.SalesPersonID,FirstName,LastName,SUM(Quantity) as 'total_quantity' FROM sales.sales1 t1
+JOIN sales.employees t2
+ON t1.SalesPersonID = t2.EmployeeID
+GROUP BY t1.SalesPersonID, t2.FirstName, t2.LastName
+ORDER BY total_quantity DESC LIMIT 5
+
+3) SALES MAN NAME WHO HAS MOST NUMBER OF UNIQUE CUSTOMERS
