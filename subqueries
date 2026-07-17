@@ -1,0 +1,30 @@
+1)  FIND TOP RATED MOVIES  
+
+  (normal query)
+SELECT * FROM subqueries.movies t1
+ORDER BY t1.score DESC LIMIT 1;
+
+   (subquery)
+SELECT * FROM subqueries.movies
+WHERE score = (SELECT MAX(score) FROM subqueries.movies);
+
+                                                                        INDEPENDENT SUBQUERY - SCALAR SUBQUERY
+                                                                        ---------------------------------------
+
+1) FIND THE MOVIE WITH HIGHEST PROFIT
+SELECT * FROM subqueries.movies t1
+WHERE (t1.gross - t1.budget) = (SELECT MAX(gross - budget) FROM subqueries.movies);
+
+2) FIND HOW MANY MOVIES HAS A RATINGG > THE AVERAGE OF ALL MOVIES RATING
+SELECT COUNT(*) FROM subqueries.movies
+WHERE score > (SELECT AVG(score) FROM subqueries.movies);
+
+3) FIND THE HIGHEST RATED MOVIE OF 2000 
+SELECT * FROM subqueries.movies
+WHERE year = 2000 AND score=(SELECT MAX(score) FROM subqueries.movies
+					WHERE year = 2000);
+
+4) FIND THE HIGHEST RATED MOVIE AMONG THE ALL MOVIES WHOES NUMBER OF VOTES ARE > THE DATASET AVG VOTES
+SELECT * FROM subqueries.movies
+WHERE score = (SELECT MAX(score) FROM subqueries.movies
+WHERE votes > (SELECT AVG(votes) FROM subqueries.movies));
