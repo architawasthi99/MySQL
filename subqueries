@@ -28,3 +28,31 @@ WHERE year = 2000 AND score=(SELECT MAX(score) FROM subqueries.movies
 SELECT * FROM subqueries.movies
 WHERE score = (SELECT MAX(score) FROM subqueries.movies
 WHERE votes > (SELECT AVG(votes) FROM subqueries.movies));
+
+
+                                                                        INDEPENDENT SUBQUERY - ROW SUBQUERY
+                                                                        ---------------------------------------
+
+1) FIND ALL USERS WHO NEVER ORDERED
+SELECT * FROM zomato.users 
+WHERE user_id NOT IN (SELECT DISTINCT(user_id) FROM zomato.orders);
+
+2) FIND ALL THE MOVIES MADE BY TOP 3 DIRECTOS IN TERMS OF GROSS INCOME
+WITH top_directors AS (SELECT director FROM subqueries.movies                                              /// TEMPORARY TABLE
+				   GROUP BY director
+                   ORDER BY SUM(gross) DESC LIMIT 3)
+SELECT * FROM subqueries.movies
+WHERE director IN (SELECT * FROM top_directors)
+
+3) FIND ALL MOVIES OF ALL THOSE ACTORS WHOES AVERAGE RATING > 8.5
+SELECT *
+FROM subqueries.movies
+WHERE star IN (
+    SELECT star
+    FROM subqueries.movies
+    WHERE votes > 25000
+    GROUP BY star
+    HAVING AVG(score) > 8.5
+);
+
+
