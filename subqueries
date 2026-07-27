@@ -55,4 +55,8 @@ WHERE star IN (
     HAVING AVG(score) > 8.5
 );
 
+                                                                        INDEPENDENT SUBQUERY - TABLE SUBQUERY
+                                                                        ---------------------------------------
+
+1) 
 
