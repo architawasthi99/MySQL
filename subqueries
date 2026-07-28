@@ -58,5 +58,16 @@ WHERE star IN (
                                                                         INDEPENDENT SUBQUERY - TABLE SUBQUERY
                                                                         ---------------------------------------
 
-1) 
+1) FIND MOST PROFITABLE MOVIES OF EACH YEAR
+SELECT * FROM subqueries.movies
+WHERE (year,gross-budget) IN (SELECT year,MAX(gross-budget) 
+FROM subqueries.movies
+GROUP BY year)
+
+2) FIND THE HIGHEST RATED MOVIE OF EACH GENRE CUTOFF VOTES 25000
+SELECT * FROM subqueries.movies
+WHERE (genre,score) IN (SELECT genre,MAX(score) FROM subqueries.movies
+WHERE votes>25000
+GROUP BY genre)
+AND votes > 25000
 
