@@ -1,4 +1,4 @@
-1)  FIND TOP RATED MOVIES  
+--1)  FIND TOP RATED MOVIES  
 
   (normal query)
 SELECT * FROM subqueries.movies t1
@@ -8,43 +8,43 @@ ORDER BY t1.score DESC LIMIT 1;
 SELECT * FROM subqueries.movies
 WHERE score = (SELECT MAX(score) FROM subqueries.movies);
 
-                                                                        INDEPENDENT SUBQUERY - SCALAR SUBQUERY
+                                                                 --       INDEPENDENT SUBQUERY - SCALAR SUBQUERY
                                                                         ---------------------------------------
 
-1) FIND THE MOVIE WITH HIGHEST PROFIT
+--1) FIND THE MOVIE WITH HIGHEST PROFIT
 SELECT * FROM subqueries.movies t1
 WHERE (t1.gross - t1.budget) = (SELECT MAX(gross - budget) FROM subqueries.movies);
 
-2) FIND HOW MANY MOVIES HAS A RATINGG > THE AVERAGE OF ALL MOVIES RATING
+--2) FIND HOW MANY MOVIES HAS A RATINGG > THE AVERAGE OF ALL MOVIES RATING
 SELECT COUNT(*) FROM subqueries.movies
 WHERE score > (SELECT AVG(score) FROM subqueries.movies);
 
-3) FIND THE HIGHEST RATED MOVIE OF 2000 
+--3) FIND THE HIGHEST RATED MOVIE OF 2000 
 SELECT * FROM subqueries.movies
 WHERE year = 2000 AND score=(SELECT MAX(score) FROM subqueries.movies
 					WHERE year = 2000);
 
-4) FIND THE HIGHEST RATED MOVIE AMONG THE ALL MOVIES WHOES NUMBER OF VOTES ARE > THE DATASET AVG VOTES
+--4) FIND THE HIGHEST RATED MOVIE AMONG THE ALL MOVIES WHOES NUMBER OF VOTES ARE > THE DATASET AVG VOTES
 SELECT * FROM subqueries.movies
 WHERE score = (SELECT MAX(score) FROM subqueries.movies
 WHERE votes > (SELECT AVG(votes) FROM subqueries.movies));
 
 
-                                                                        INDEPENDENT SUBQUERY - ROW SUBQUERY
+                                                                   --     INDEPENDENT SUBQUERY - ROW SUBQUERY
                                                                         ---------------------------------------
 
-1) FIND ALL USERS WHO NEVER ORDERED
+--1) FIND ALL USERS WHO NEVER ORDERED
 SELECT * FROM zomato.users 
 WHERE user_id NOT IN (SELECT DISTINCT(user_id) FROM zomato.orders);
 
-2) FIND ALL THE MOVIES MADE BY TOP 3 DIRECTOS IN TERMS OF GROSS INCOME
+--2) FIND ALL THE MOVIES MADE BY TOP 3 DIRECTOS IN TERMS OF GROSS INCOME
 WITH top_directors AS (SELECT director FROM subqueries.movies                                              /// TEMPORARY TABLE
 				   GROUP BY director
                    ORDER BY SUM(gross) DESC LIMIT 3)
 SELECT * FROM subqueries.movies
 WHERE director IN (SELECT * FROM top_directors)
 
-3) FIND ALL MOVIES OF ALL THOSE ACTORS WHOES AVERAGE RATING > 8.5
+--3) FIND ALL MOVIES OF ALL THOSE ACTORS WHOES AVERAGE RATING > 8.5
 SELECT *
 FROM subqueries.movies
 WHERE star IN (
@@ -55,16 +55,16 @@ WHERE star IN (
     HAVING AVG(score) > 8.5
 );
 
-                                                                        INDEPENDENT SUBQUERY - TABLE SUBQUERY
+                                                                --        INDEPENDENT SUBQUERY - TABLE SUBQUERY
                                                                         ---------------------------------------
 
-1) FIND MOST PROFITABLE MOVIES OF EACH YEAR
+--1) FIND MOST PROFITABLE MOVIES OF EACH YEAR
 SELECT * FROM subqueries.movies
 WHERE (year,gross-budget) IN (SELECT year,MAX(gross-budget) 
 FROM subqueries.movies
 GROUP BY year)
 
-2) FIND THE HIGHEST RATED MOVIE OF EACH GENRE CUTOFF VOTES 25000
+--2) FIND THE HIGHEST RATED MOVIE OF EACH GENRE CUTOFF VOTES 25000
 SELECT * FROM subqueries.movies
 WHERE (genre,score) IN (SELECT genre,MAX(score) FROM subqueries.movies
 WHERE votes>25000
