@@ -1,17 +1,17 @@
-# SELECT DISTINCT VALUES FROM A COLUMN
+--# SELECT DISTINCT VALUES FROM A COLUMN
 SELECT DISTINCT (processor_brand) AS 'processor' FROM employee.smartphones;
 
-# SELECT DISTINCT COMBINATIONS FROM  MORE THAN 2 TABLES
+--# SELECT DISTINCT COMBINATIONS FROM  MORE THAN 2 TABLES
 SELECT DISTINCT brand_name AS 'Company',processor_brand AS 'processor' FROM employee.smartphones;
 
-#FILTERING ROWS BASEED ON WHERE CLAUSE
+--#FILTERING ROWS BASEED ON WHERE CLAUSE
 SELECT * FROM employee.smartphones 
 WHERE  brand_name='samsung';
 
 SELECT * FROM employee.smartphones 
 WHERE  price > 50000;
 
-#FIND ALL THE PHONES IN THE RANGE
+--#FIND ALL THE PHONES IN THE RANGE
 SELECT * FROM employee.smartphones 
 WHERE  price > 10000 AND price < 20000;
                  OR
@@ -33,7 +33,7 @@ WHERE price>50000;
 SELECT distinct brand_name FROM employee.smartphones 
 WHERE price>50000;
 
-#USE OF OR OPERATOR
+--#USE OF OR OPERATOR
 
 SELECT * FROM employee.smartphones
 WHERE processor_brand = 'snapdragon' OR 
@@ -49,37 +49,37 @@ SELECT * FROM employee.smartphones
 WHERE processor_brand NOT IN ('snapdragon','exynos', 'bionic');
 
 
-# HOW TO UPDATE TABLE // chnaging the brand of processor
+--# HOW TO UPDATE TABLE // chnaging the brand of processor
 UPDATE employee.smartphones
 SET processor_brand = 'INDUSMATI'                      // SET email='archit@yahoo.com', pass='976'  WHERE name='archit';
 WHERE processor_brand = 'snapdragon';
 
-# DELETE
+--# DELETE
 DELETE FROM employee.smartphones
 WHERE price > 200000;
 
-MULTIPLE CONDITION DELETION
+--MULTIPLE CONDITION DELETION
 DELETE FROM employee.smartphones
 WHERE price > 200000 AND brand_name='samsung' AND ram='8';
 
 
-# SQL FUNCTION
+--# SQL FUNCTION
 
-1) MAX
+--1) MAX
 SELECT MAX(price) FROM employee.smartphones;
-2) MIN 
+--2) MIN 
 SELECT MIN(price) FROM employee.smartphones;
 
 SELECT * FROM employee.smartphones
 WHERE brand_name='samsung' AND price = '7249';
 
-3) AVERAGE
+--3) AVERAGE
 SELECT AVG(rating) FROM employee.smartphones
 WHERE brand_name='apple';
 
-4) SUM
+--4) SUM
  SELECT SUM(price) FROM employee.smartphones;
 
-5) COUNT
+--5) COUNT
  SELECT COUNT(*) FROM employee.smartphones
 WHERE brand_name='apple';
