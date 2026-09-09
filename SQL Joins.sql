@@ -1,18 +1,18 @@
-1) CROSS JOIN
+--1) CROSS JOIN
 SELECT * FROM sql_cx_live.users1  t1
 CROSS JOIN sql_cx_live.groups t2;
 
-2) INNER JOIN 
+--2) INNER JOIN 
 SELECT * FROM sql_cx_live.membership t1
 INNER JOIN sql_cx_live.users1 t2
 ON t1.user_id = t2.user_id;
 
-3) LEFT JOIN
+--3) LEFT JOIN
 SELECT * FROM sql_cx_live.membership t1
 LEFT JOIN sql_cx_live.users1 t2
 ON t1.user_id = t2.user_id;
 
-4) RIGHT JOIN 
+--4) RIGHT JOIN 
 SELECT * FROM sql_cx_live.membership t1
 RIGHT JOIN sql_cx_live.users1 t2
 ON t1.user_id = t2.user_id;
