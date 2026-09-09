@@ -1,13 +1,13 @@
-Freedom Ranking for Different Countries
+--Freedom Ranking for Different Countries
   
-Q-1) Find out top 10 countries' which have maximum A and D values.
+--Q-1) Find out top 10 countries' which have maximum A and D values.
 SELECT t1.Country, SUM(t1.A) AS 'max_A', SUM(t2.D) AS 'max_B', SUM(t1.A) + SUM(t2.D) AS 'total_rating' FROM sql_task.country_ab t1
 JOIN sql_task.country_cd t2
 ON t1.Country = t2.Country
 GROUP BY t1.Country
 ORDER BY total_rating DESC LIMIT 10;
 
-Q-2) FIRST MAXIMUM A COUNTRY THEN MAXIMUM D COUNTRIES 
+--Q-2) FIRST MAXIMUM A COUNTRY THEN MAXIMUM D COUNTRIES 
   
 SELECT A.Country, A, D FROM(SELECT Country, A FROM sql_task.country_ab
 ORDER BY A DESC LIMIT 10) A
@@ -27,7 +27,7 @@ ON A.Country = B.Country
 
 ORDER BY Country;
 
-Q-3) Find out highest CL value for 2020 for every region. Also sort the result in descending order. Also display the CL values in descending order.
+--Q-3) Find out highest CL value for 2020 for every region. Also sort the result in descending order. Also display the CL values in descending order.
   
 SELECT Region, MAX(CL) FROM sql_task.country_cl t1
 JOIN sql_task.country_ab t2
