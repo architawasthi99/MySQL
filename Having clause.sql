@@ -1,4 +1,4 @@
-1) Find the avg price of smartphone brands which have atleast 20 phones
+--1) Find the avg price of smartphone brands which have atleast 20 phones
 SELECT brand_name,
 ROUND(AVG(price)) AS 'avg_price'
 FROM employee.smartphones
@@ -6,7 +6,7 @@ GROUP BY brand_name
 HAVING count(*) >= 20
 ORDER BY brand_name ASC;
 
-2) Find the avg rating of smartphone brands which have more than 20 phones
+--2) Find the avg rating of smartphone brands which have more than 20 phones
 SELECT brand_name,
 COUNT(*) AS 'count',
 ROUND(AVG(rating)) AS 'avg_rating'
@@ -15,7 +15,7 @@ GROUP BY brand_name
 HAVING count > 20
 ORDER BY count ASC;
 
-3) Find the top 3 brands with the highest avg RAM that have a refresh rate of at least 90 Hz and fast charging available, and don't consider brands which have less than 10 phones
+--3) Find the top 3 brands with the highest avg RAM that have a refresh rate of at least 90 Hz and fast charging available, and don't consider brands which have less than 10 phones
 SELECT brand_name,
 COUNT(*) AS 'count',
 ROUND(AVG(ram_capacity)) AS 'avg_ram'
@@ -25,7 +25,7 @@ GROUP BY brand_name
 HAVING count > 10
 ORDER BY avg_ram DESC LIMIT 3;
 
-4) Find the avg price of all the phone brands with avg rating > 70 and num_phones more than 10 among all 5G enabled phones
+--4) Find the avg price of all the phone brands with avg rating > 70 and num_phones more than 10 among all 5G enabled phones
 SELECT brand_name,
 ROUND(AVG(rating)) AS 'avg_rating',
 ROUND(AVG(price)) AS 'avg_price'
