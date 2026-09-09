@@ -2,7 +2,7 @@ SELECT * FROM sql_cx_live.students t1
 JOIN sql_cx_live.class t2
 ON t1.class_id = t2.class_id AND t1.enrollment_year = t2.class_year;
 
-2) JOINING 3 TABLES
+--2) JOINING 3 TABLES
 SELECT * FROM  flipkart.order_details t1
 JOIN flipkart.orders t2
 ON t1.order_id = t2.order_id
@@ -17,13 +17,13 @@ SELECT t1.order_id , t2.vertical FROM flipkart.order_details t1
 JOIN flipkart.category t2
 ON t1.category_id = t2.category_id;
 
-# FILTERING ROWS AFTER JOIN 
+--# FILTERING ROWS AFTER JOIN 
 1) FIND ALL PROFITABLE ORDERS
 SELECT * FROM flipkart.order_details t1
 WHERE t1.profit > 0 
 ORDER BY t1.profit DESC;
 
-2) FIND THE CUSTOMER WHO HAS PLACES MAX AMOUNT OF ORDERS
+--2) FIND THE CUSTOMER WHO HAS PLACES MAX AMOUNT OF ORDERS
 SELECT t1.order_id, SUM(t2.profit) AS 'profit' FROM flipkart.orders t1
 JOIN flipkart.order_details t2
 ON t1.order_id = t2.order_id
