@@ -12,3 +12,16 @@ SELECT
     SUM(CASE WHEN gender='M' THEN 1 ELSE 0 END) AS male_count,
     SUM(CASE WHEN gender='F' THEN 1 ELSE 0 END) AS female_count
 FROM patients;  
+
+
+--OR
+SELECT
+    (SELECT COUNT(*) FROM patients WHERE gender='M') AS male_count,
+    (SELECT COUNT(*) FROM patients WHERE gender='F') AS female_count;
+
+--OR
+
+SELECT
+   SUM(gender='M') AS male_count,
+   SUM(gender='F') AS female_count
+FROM patients  
