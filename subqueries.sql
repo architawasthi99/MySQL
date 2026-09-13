@@ -71,3 +71,11 @@ WHERE votes>25000
 GROUP BY genre)
 AND votes > 25000
 
+--3)FIND HIGHEST GROSSING MOVIES OF TOP 5 ACTOR/DIRECTOR COMBO IN TERMS OF TOTAL GROSS INCOME
+WITH top_duo as (select actor,director
+                 FROM movies
+                 GROUP BY actor,director
+                 ORDER BY SUM(gross) DESC LIMIT 5)
+
+SELECT * FROM movies
+WHERE (actor,director,gross) IN (SELECT * FROM top_duo)
