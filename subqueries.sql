@@ -79,3 +79,14 @@ WITH top_duo as (select actor,director
 
 SELECT * FROM movies
 WHERE (actor,director,gross) IN (SELECT * FROM top_duo)
+
+
+                                                                            --USE OF SUBQUERY IN SELECT
+--GET THE PERCENTAGE OF VOTES FOR EACH MOVIES COMPARED TO THE TOTAL NUMBER OF VOTES
+SELECT name,(votes/(SELECT SUM(votes) FROM movies))*100 from movies
+
+--DISPLAY name,genre,score,avg score of each genre
+SELECT name,genre,score,
+(SELECT AVG(sore) FROM movies m2 WHERE m2.genre=m1.genre)
+FROM movies m1
+
