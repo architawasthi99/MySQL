@@ -1,0 +1,7 @@
+	SELECT name,branch,marks
+	FROM (
+		SELECT *,
+		row_number() OVER(PARTITION BY branch ORDER BY marks DESC) AS 'Rank'
+		FROM marks
+	)t
+	WHERE t.rank=1;
