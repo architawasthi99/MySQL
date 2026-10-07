@@ -6,3 +6,4 @@ FROM(
     GROUP BY BattingTeam,batter
 )t
 WHERE t.rank_within_team<6
+ORDER BY t.BattingTeam, rank_within_team
