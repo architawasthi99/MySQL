@@ -1,0 +1,3 @@
+SELECT *,
+PERCENTILE_DISC(0.5) WITHIN GROUP(ORDER BY marks) OVER() AS 'median_marks'
+FROM marks
